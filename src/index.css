@@ -1,0 +1,35 @@
+body {
+    background-color: #f8f8f2;
+    margin: 0;
+}
+/* Bagian untuk membuat konten berada di tengah */
+.hero {
+    height: 100vh; /* Mengambil seluruh tinggi layar */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Menempatkan konten di tengah secara vertikal */
+    align-items: center; /* Menempatkan konten di tengah secara horizontal */
+    text-align: center;
+}
+.highlight {
+    font-family: 'Dancing Script', cursive;
+    color: #00bcd4;
+    position: relative;
+}
+.highlight::after {
+    content: '';
+    position: absolute;
+    left: -10px;
+    right: -10px;
+    bottom: 0;
+    height: 1.5em;
+    border-bottom: 2px solid #000;
+    border-radius: 50%;
+    z-index: -1;
+}
+.spacer {
+    height: 500px; /* Ruang kosong sebelum bagian gallery */
+}
+.gallery-bg {
+    background-color: #f5f5f0;
+}
