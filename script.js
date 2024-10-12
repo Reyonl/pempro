@@ -14,19 +14,23 @@ document.addEventListener('keydown', (event) => {
         handleInput('=');
     } else if (event.key === 'Escape') {
         handleInput('C');
+    } else if (event.key === 'Backspace') {
+        handleInput('CE');
     }
 });
 
 function handleInput(value) {
     if (value === 'C') {
-        display.value = '';
+        display.value = '';  // Clear all input
+    } else if (value === 'CE') {
+        display.value = display.value.slice(0, -1);  // Remove the last character
     } else if (value === '=') {
         try {
-            display.value = eval(display.value);
+            display.value = eval(display.value);  // Evaluate the expression
         } catch {
-            display.value = 'Error';
+            display.value = 'Error';  // Display error if evaluation fails
         }
     } else {
-        display.value += value;
+        display.value += value;  // Append the clicked or typed value
     }
 }
