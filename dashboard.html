@@ -1,0 +1,196 @@
+<html>
+<head>
+    <title>Admin Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Function to toggle dark mode
+        function toggleDarkMode() {
+            const html = document.documentElement;
+            html.classList.toggle('dark');
+            if (html.classList.contains('dark')) {
+                localStorage.setItem('theme', 'dark');
+            } else {
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        // Apply the saved theme on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem('theme') === 'dark') {
+                document.documentElement.classList.add('dark');
+            }
+        });
+    </script>
+</head>
+<body class="bg-blue-100 dark:bg-gray-900 dark:text-white flex flex-col md:flex-row">
+    <!-- Sidebar -->
+    <div id="sidebar" class="w-full md:w-64 bg-[#EAC290] dark:bg-gray-800 h-auto md:h-screen shadow-lg flex flex-col justify-between">
+        <div class="p-6">
+            <h1 class="text-2xl font-bold mb-6">Admin Dashboard</h1>
+            <ul>
+                <li class="mb-4">
+                    <a href="#" class="flex items-center text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400">
+                        <i class="fas fa-tachometer-alt mr-3"></i> Dashboard
+                    </a>
+                </li>
+                <li class="mb-4">
+                    <a href="#" class="flex items-center text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400">
+                        <i class="fas fa-pencil-alt mr-3"></i> Kelola Postingan
+                    </a>
+                </li>
+                <li class="mb-4">
+                    <a href="#" class="flex items-center text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400">
+                        <i class="fas fa-comments mr-3"></i> Kelola Komentar
+                    </a>
+                </li>
+                <li class="mb-4">
+                    <a href="#" class="flex items-center text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400">
+                        <i class="fas fa-users mr-3"></i> Kelola Pengguna
+                    </a>
+                </li>
+                <li class="mb-4">
+                    <a href="#" class="flex items-center text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400">
+                        <i class="fas fa-chart-line mr-3"></i> Statistik
+                    </a>
+                </li>
+                <li class="mb-4">
+                    <a href="#" class="flex items-center text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400">
+                        <i class="fas fa-cogs mr-3"></i> Pengaturan
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="p-6">
+            <button id="logoutButton" class="bg-red-500 text-white px-4 py-2 rounded-lg w-full">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+        </div>
+    </div>
+    <!-- Main Content -->
+    <div class="flex-1 p-6">
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="text-2xl font-bold">Admin Dashboard</h1>
+            <div>
+                <button id="toggleSidebarButton" class="bg-gray-500 text-white px-4 py-2 rounded-lg mr-2">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <button id="addPostButton" class="bg-blue-500 text-white px-4 py-2 rounded-lg">
+                    <i class="fas fa-plus"></i> Tambah Postingan
+                </button>
+                <button onclick="toggleDarkMode()" class="bg-gray-500 text-white px-4 py-2 rounded-lg ml-2">
+                    <i class="fas fa-moon"></i> Dark Mode
+                </button>
+            </div>
+        </div>
+        <div class="bg-[#EAC290] dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                <div class="bg-blue-100 dark:bg-blue-900 p-4 rounded-lg text-center">
+                    <h2 class="text-lg font-semibold">Jumlah Postingan</h2>
+                    <p class="text-2xl">2</p>
+                </div>
+                <div class="bg-green-100 dark:bg-green-900 p-4 rounded-lg text-center">
+                    <h2 class="text-lg font-semibold">Jumlah Komentar</h2>
+                    <p class="text-2xl">5</p>
+                </div>
+                <div class="bg-purple-100 dark:bg-purple-900 p-4 rounded-lg text-center">
+                    <h2 class="text-lg font-semibold">Kunjungan User</h2>
+                    <p class="text-2xl">89</p>
+                </div>
+                <div class="bg-yellow-100 dark:bg-yellow-900 p-4 rounded-lg text-center">
+                    <h2 class="text-lg font-semibold">Kunjungan User Bulan Lalu</h2>
+                    <p class="text-2xl">22</p>
+                </div>
+            </div>
+            <div class="mb-6">
+                <h2 class="text-xl font-semibold mb-4">Statistik Kunjungan User</h2>
+                <canvas id="userVisitsChart"></canvas>
+            </div>
+            <h2 class="text-xl font-semibold mb-4">Postingan Terbaru</h2>
+            <div class="bg-green-50 dark:bg-green-900 p-4 rounded-lg mb-4">
+                <div class="flex justify-between items-center mb-2">
+                    <h3 class="text-lg font-semibold">my daily activity</h3>
+                    <div>
+                        <i class="fas fa-edit text-blue-500 cursor-pointer edit-post"></i>
+                        <i class="fas fa-trash-alt text-red-500 cursor-pointer ml-2 delete-post"></i>
+                    </div>
+                </div>
+                <p class="mb-2">wow</p>
+                <p class="text-gray-500 dark:text-gray-400 text-sm mb-2">19 Oct 2024, 02:36</p>
+                <p class="font-semibold">Komentar:</p>
+                <button class="bg-gray-500 text-white px-4 py-2 rounded-lg mt-2">
+                    <i class="fas fa-comments"></i> 4 Komentar
+                </button>
+            </div>
+            <div class="bg-green-50 dark:bg-green-900 p-4 rounded-lg mb-4">
+                <div class="flex justify-between items-center mb-2">
+                    <h3 class="text-lg font-semibold">perkenalan</h3>
+                    <div>
+                        <i class="fas fa-edit text-blue-500 cursor-pointer edit-post"></i>
+                        <i class="fas fa-trash-alt text-red-500 cursor-pointer ml-2 delete-post"></i>
+                    </div>
+                </div>
+                <p class="mb-2">hai nama saya reyon</p>
+                <p class="text-gray-500 dark:text-gray-400 text-sm mb-2">19 Oct 2024, 02:09</p>
+                <p class="font-semibold">Komentar:</p>
+                <button class="bg-gray-500 text-white px-4 py-2 rounded-lg mt-2">
+                    <i class="fas fa-comments"></i> 1 Komentar
+                </button>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Chart.js setup
+        const ctx = document.getElementById('userVisitsChart').getContext('2d');
+        const userVisitsChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['6 Bulan Lalu','5 Bulan Lalu','4 Bulan Lalu','3 Bulan Lalu','2 Bulan Lalu', 'Bulan Ini'],
+                datasets: [{
+                    label: 'Kunjungan User',
+                    data: [18,30,33,90, 22,89],
+                    backgroundColor: 'rgba(139, 92, 246, 0.2)',
+                    borderColor: '#8b5cf6',
+                    borderWidth: 2,
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Event listeners for buttons
+        document.getElementById('addPostButton').addEventListener('click', function() {
+            alert('Tambah Postingan button clicked!');
+        });
+
+        document.querySelectorAll('.edit-post').forEach(function(button) {
+            button.addEventListener('click', function() {
+                alert('Edit Post button clicked!');
+            });
+        });
+
+        document.querySelectorAll('.delete-post').forEach(function(button) {
+            button.addEventListener('click', function() {
+                alert('Delete Post button clicked!');
+            });
+        });
+
+        document.getElementById('logoutButton').addEventListener('click', function() {
+            alert('Logout button clicked!');
+        });
+
+        document.getElementById('toggleSidebarButton').addEventListener('click', function() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>

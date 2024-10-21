@@ -43,8 +43,10 @@ body {
 }
 
 .spacer {
-    height: 500px; 
+    height: 200px; 
 }
+
+
 
 .gallery-bg {
     background-color: #f5f5f0;
@@ -65,3 +67,7 @@ button {
 button:hover {
     background-color: #2980b9;
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+        body {
+            font-family: 'Roboto', sans-serif;}
