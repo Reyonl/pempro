@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistik</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Chart containers hidden by default */
+        .chart-container {
+            display: none;
+            height: 300px;
+        }
+        .chart-container.active {
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col">
+
+    <!-- Navbar -->
+    <nav class="bg-blue-600 text-white p-4 flex justify-between items-center">
+        <h1 class="text-lg font-semibold">Statistik</h1>
+        <a href="index.html" class="bg-white text-blue-600 py-2 px-4 rounded hover:bg-gray-200">Back to Home</a>
+    </nav>
+
+    <!-- Content Wrapper -->
+    <div class="flex flex-1 flex-col lg:flex-row">
+        
+        <!-- Sidebar -->
+        <aside class="w-full lg:w-1/4 bg-white shadow-md p-4">
+            <h2 class="text-lg font-semibold mb-4">Pilih Statistik</h2>
+            <button onclick="showChart('weeklyViewsChart')" class="w-full bg-blue-500 text-white py-2 mb-2 rounded">View Mingguan</button>
+            <button onclick="showChart('hourlyIntensityChart')" class="w-full bg-blue-500 text-white py-2 mb-2 rounded">Intensitas per Jam</button>
+            <button onclick="showChart('monthlyViewsChart')" class="w-full bg-blue-500 text-white py-2 mb-2 rounded">View Bulanan</button>
+            <button onclick="showChart('yearlyOverviewChart')" class="w-full bg-blue-500 text-white py-2 rounded">Overview Tahunan</button>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="flex-1 p-4 lg:p-8 bg-gray-50">
+            <div id="weeklyViewsChart" class="chart-container active">
+                <h3 class="text-xl font-semibold mb-4 text-center">Jumlah View per Hari (Minggu Ini)</h3>
+                <canvas></canvas>
+            </div>
+
+            <div id="hourlyIntensityChart" class="chart-container">
+                <h3 class="text-xl font-semibold mb-4 text-center">Intensitas Penglihat per Jam</h3>
+                <canvas></canvas>
+            </div>
+
+            <div id="monthlyViewsChart" class="chart-container">
+                <h3 class="text-xl font-semibold mb-4 text-center">Jumlah View per Bulan (Tahun Ini)</h3>
+                <canvas></canvas>
+            </div>
+
+            <div id="yearlyOverviewChart" class="chart-container">
+                <h3 class="text-xl font-semibold mb-4 text-center">Overview Tahunan</h3>
+                <canvas></canvas>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Function to show the selected chart
+        function showChart(chartId) {
+            // Hide all chart containers
+            document.querySelectorAll('.chart-container').forEach(container => {
+                container.classList.remove('active');
+            });
+
+            // Show the selected chart container
+            document.getElementById(chartId).classList.add('active');
+        }
+
+        // Chart.js configurations for each chart
+        const weeklyViewsData = {
+            labels: ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'],
+            datasets: [{ label: 'Jumlah View', data: [20, 35, 40, 50, 30, 45, 60], backgroundColor: 'rgba(255, 99, 132, 0.2)', borderColor: 'rgba(255, 99, 132, 1)', borderWidth: 1 }]
+        };
+
+        const hourlyIntensityData = {
+            labels: ['00:00', '02:00', '04:00', '06:00', '08:00', '10:00', '12:00', '14:00', '16:00', '18:00', '20:00', '22:00'],
+            datasets: [{ label: 'Intensitas Penglihat', data: [5, 3, 2, 7, 10, 15, 20, 25, 30, 28, 18, 10], fill: false, borderColor: 'rgba(54, 162, 235, 1)', tension: 0.1 }]
+        };
+
+        const monthlyViewsData = {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'],
+            datasets: [{ label: 'Jumlah View', data: [300, 400, 350, 500, 700, 600, 800, 750, 850, 900, 950, 1000], backgroundColor: 'rgba(75, 192, 192, 0.2)', borderColor: 'rgba(75, 192, 192, 1)', borderWidth: 1 }]
+        };
+
+        const yearlyOverviewData = {
+            labels: ['2019', '2020', '2021', '2022', '2023'],
+            datasets: [{ label: 'Jumlah View per Tahun', data: [5000, 7000, 6000, 8000, 9500], backgroundColor: 'rgba(153, 102, 255, 0.2)', borderColor: 'rgba(153, 102, 255, 1)', borderWidth: 1 }]
+        };
+
+        // Render charts
+        new Chart(document.querySelector('#weeklyViewsChart canvas'), { type: 'bar', data: weeklyViewsData, options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true } } } });
+        new Chart(document.querySelector('#hourlyIntensityChart canvas'), { type: 'line', data: hourlyIntensityData, options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true } } } });
+        new Chart(document.querySelector('#monthlyViewsChart canvas'), { type: 'bar', data: monthlyViewsData, options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true } } } });
+        new Chart(document.querySelector('#yearlyOverviewChart canvas'), { type: 'bar', data: yearlyOverviewData, options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true } } } });
+    </script>
+</body>
+</html>
