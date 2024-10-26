@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Postingan Baru</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Custom toolbar icon styling */
+        .toolbar-icon {
+            cursor: pointer;
+            padding: 8px;
+            font-size: 1.2rem;
+            color: #4B5563;
+        }
+        .toolbar-icon:hover {
+            color: #FF5722;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="flex flex-col md:flex-row p-4 md:p-8 space-y-6 md:space-y-0 md:space-x-6">
+        <!-- Main editor section -->
+        <div class="flex-grow bg-white p-4 shadow-md rounded-md">
+            <!-- Title input -->
+            <input type="text" placeholder="Judul" class="w-full text-2xl font-semibold border-b mb-4 focus:outline-none focus:border-orange-500 p-2" />
+
+            <!-- Toolbar section -->
+            <div class="flex flex-wrap items-center border-b mb-4 space-x-2 space-y-2">
+                <span class="toolbar-icon"><i class="fas fa-bold"></i></span>
+                <span class="toolbar-icon"><i class="fas fa-italic"></i></span>
+                <span class="toolbar-icon"><i class="fas fa-underline"></i></span>
+                <span class="toolbar-icon"><i class="fas fa-strikethrough"></i></span>
+                <span class="toolbar-icon"><i class="fas fa-align-left"></i></span>
+                <span class="toolbar-icon"><i class="fas fa-align-center"></i></span>
+                <span class="toolbar-icon"><i class="fas fa-align-right"></i></span>
+                <span class="toolbar-icon"><i class="fas fa-list-ul"></i></span>
+                <span class="toolbar-icon"><i class="fas fa-list-ol"></i></span>
+                <span class="toolbar-icon"><i class="fas fa-link"></i></span>
+                <span class="toolbar-icon"><i class="fas fa-image"></i></span>
+            </div>
+
+            <!-- Content input -->
+            <textarea placeholder="Mulai menulis..." class="w-full h-96 border focus:outline-none focus:border-orange-500 p-4 rounded-md resize-none"></textarea>
+        </div>
+
+        <!-- Sidebar for post settings -->
+        <div class="w-full md:w-1/4 bg-white p-4 shadow-md rounded-md">
+            <button class="w-full bg-orange-500 text-white py-2 mb-4 rounded-md">Publikasikan</button>
+
+            <div class="border-t pt-4">
+                <h3 class="font-semibold mb-2">Setelan postingan</h3>
+                
+                <!-- Label setting -->
+                <div class="mb-4">
+                    <label class="block font-medium">Label</label>
+                    <input type="text" placeholder="Pisahkan label dengan koma" class="w-full border p-2 mt-1 rounded-md" />
+                </div>
+
+                <!-- Publish date setting -->
+                <div class="mb-4">
+                    <label class="block font-medium">Dipublikasikan pada</label>
+                    <input type="datetime-local" class="w-full border p-2 mt-1 rounded-md" />
+                </div>
+
+                <!-- Permalink setting -->
+                <div class="mb-4">
+                    <label class="block font-medium">Permalink</label>
+                    <input type="text" placeholder="Masukkan permalink" class="w-full border p-2 mt-1 rounded-md" />
+                </div>
+
+                <!-- Location setting -->
+                <div class="mb-4">
+                    <label class="block font-medium">Lokasi</label>
+                    <input type="text" placeholder="Masukkan lokasi" class="w-full border p-2 mt-1 rounded-md" />
+                </div>
+
+                <!-- Options -->
+                <div class="mb-4">
+                    <label class="block font-medium">Opsi</label>
+                    <select class="w-full border p-2 mt-1 rounded-md">
+                        <option value="">Opsi 1</option>
+                        <option value="">Opsi 2</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Font Awesome icons (for toolbar icons) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+</body>
+</html>

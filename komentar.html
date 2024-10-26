@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comments Section</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-2xl mx-auto bg-white shadow-lg rounded-lg p-6 space-y-8">
+
+        <!-- Post 1 - Bouquet start 45k -->
+        <div class="post">
+            <h3 class="text-lg font-semibold">Bouquet start 45k</h3>
+            <p class="text-gray-500">Dipublikasikan 15 Okt</p>
+            
+            <div class="comments mt-4 space-y-4" id="comments-post-1">
+                <h4 class="text-md font-semibold">Komentar</h4>
+                <!-- Example Comment -->
+                <div class="p-4 bg-gray-100 rounded-lg">
+                    <p><span class="font-semibold">User1:</span> This bouquet is beautiful!</p>
+                    <div class="flex space-x-2 mt-2 text-sm text-gray-500">
+                        <button class="like-btn">Suka</button>
+                        <button class="reply-btn" onclick="openReplyInput('reply-input-post-1')">Balas</button>
+                        <button class="delete-btn">Hapus</button>
+                    </div>
+                    <!-- Reply input -->
+                    <div class="hidden mt-2" id="reply-input-post-1">
+                        <input type="text" class="border rounded w-full p-2 mt-2" placeholder="Tulis balasan...">
+                        <button onclick="postReply('comments-post-1', 'Reyon', 'reply-input-post-1')" class="mt-2 bg-blue-500 text-white py-1 px-3 rounded">Kirim</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add Comment -->
+            <input type="text" class="border rounded w-full p-2 mt-2" placeholder="Tambahkan komentar...">
+            <button onclick="postComment('comments-post-1', 'Reyon')" class="mt-2 bg-blue-500 text-white py-1 px-3 rounded">Kirim Komentar</button>
+        </div>
+
+        <!-- Post 2 - Florist Hands -->
+        <div class="post">
+            <h3 class="text-lg font-semibold">Florist Hands</h3>
+            <p class="text-gray-500">Dipublikasikan 20 Okt</p>
+
+            <div class="comments mt-4 space-y-4" id="comments-post-2">
+                <h4 class="text-md font-semibold">Komentar</h4>
+                <!-- Example Comment -->
+                <div class="p-4 bg-gray-100 rounded-lg">
+                    <p><span class="font-semibold">User2:</span> I love the arrangements!</p>
+                    <div class="flex space-x-2 mt-2 text-sm text-gray-500">
+                        <button class="like-btn">Suka</button>
+                        <button class="reply-btn" onclick="openReplyInput('reply-input-post-2')">Balas</button>
+                        <button class="delete-btn">Hapus</button>
+                    </div>
+                    <!-- Reply input -->
+                    <div class="hidden mt-2" id="reply-input-post-2">
+                        <input type="text" class="border rounded w-full p-2 mt-2" placeholder="Tulis balasan...">
+                        <button onclick="postReply('comments-post-2', 'Reyon', 'reply-input-post-2')" class="mt-2 bg-blue-500 text-white py-1 px-3 rounded">Kirim</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add Comment -->
+            <input type="text" class="border rounded w-full p-2 mt-2" placeholder="Tambahkan komentar...">
+            <button onclick="postComment('comments-post-2', 'Reyon')" class="mt-2 bg-blue-500 text-white py-1 px-3 rounded">Kirim Komentar</button>
+        </div>
+
+    </div>
+
+    <script>
+        // Function to post a comment
+        function postComment(commentSectionId, author) {
+            const commentSection = document.getElementById(commentSectionId);
+            const commentInput = commentSection.nextElementSibling.previousElementSibling;
+            const commentText = commentInput.value.trim();
+
+            if (commentText) {
+                const newComment = document.createElement('div');
+                newComment.className = "p-4 bg-gray-100 rounded-lg";
+                newComment.innerHTML = `
+                    <p><span class="font-semibold">${author}:</span> ${commentText}</p>
+                    <div class="flex space-x-2 mt-2 text-sm text-gray-500">
+                        <button class="like-btn">Suka</button>
+                        <button class="reply-btn" onclick="openReplyInput('reply-input-${commentSectionId}')">Balas</button>
+                        <button class="delete-btn" onclick="this.closest('.p-4').remove()">Hapus</button>
+                    </div>
+                    <div class="hidden mt-2" id="reply-input-${commentSectionId}">
+                        <input type="text" class="border rounded w-full p-2 mt-2" placeholder="Tulis balasan...">
+                        <button onclick="postReply('${commentSectionId}', '${author}', 'reply-input-${commentSectionId}')" class="mt-2 bg-blue-500 text-white py-1 px-3 rounded">Kirim</button>
+                    </div>
+                `;
+                commentSection.appendChild(newComment);
+                commentInput.value = "";
+            }
+        }
+
+        // Function to post a reply
+        function postReply(commentSectionId, author, replyInputId) {
+            const replyInput = document.getElementById(replyInputId).querySelector("input");
+            const replyText = replyInput.value.trim();
+
+            if (replyText) {
+                const newReply = document.createElement('p');
+                newReply.className = "ml-4 text-sm";
+                newReply.innerHTML = `<span class="font-semibold">${author}:</span> ${replyText}`;
+                document.getElementById(commentSectionId).appendChild(newReply);
+                replyInput.value = "";
+                document.getElementById(replyInputId).classList.add("hidden");
+            }
+        }
+
+        // Function to show reply input field
+        function openReplyInput(replyInputId) {
+            document.getElementById(replyInputId).classList.toggle("hidden");
+        }
+    </script>
+</body>
+</html>

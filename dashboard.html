@@ -1,195 +1,210 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Admin Dashboard</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        // Function to toggle dark mode
-        function toggleDarkMode() {
-            const html = document.documentElement;
-            html.classList.toggle('dark');
-            if (html.classList.contains('dark')) {
-                localStorage.setItem('theme', 'dark');
-            } else {
-                localStorage.setItem('theme', 'light');
-            }
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <style>
+        .post-item:hover .default-buttons {
+            display: none;
         }
-
-        // Apply the saved theme on page load
-        document.addEventListener('DOMContentLoaded', () => {
-            if (localStorage.getItem('theme') === 'dark') {
-                document.documentElement.classList.add('dark');
-            }
-        });
-    </script>
+        .post-item:hover .hover-buttons {
+            display: flex;
+        }
+        .sidebar {
+            transition: transform 0.3s ease;
+        }
+        .sidebar-closed {
+            transform: translateX(-100%);
+        }
+        .ml-0 {
+            margin-left: 0 !important;
+        }
+        .ml-64 {
+            margin-left: 16rem;
+        }
+    </style>
 </head>
-<body class="bg-blue-100 dark:bg-gray-900 dark:text-white flex flex-col md:flex-row">
+<body class="bg-gray-100">
     <!-- Sidebar -->
-    <div id="sidebar" class="w-full md:w-64 bg-[#EAC290] dark:bg-gray-800 h-auto md:h-screen shadow-lg flex flex-col justify-between">
-        <div class="p-6">
-            <h1 class="text-2xl font-bold mb-6">Admin Dashboard</h1>
-            <ul>
-                <li class="mb-4">
-                    <a href="#" class="flex items-center text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400">
-                        <i class="fas fa-tachometer-alt mr-3"></i> Dashboard
-                    </a>
-                </li>
-                <li class="mb-4">
-                    <a href="#" class="flex items-center text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400">
-                        <i class="fas fa-pencil-alt mr-3"></i> Kelola Postingan
-                    </a>
-                </li>
-                <li class="mb-4">
-                    <a href="#" class="flex items-center text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400">
-                        <i class="fas fa-comments mr-3"></i> Kelola Komentar
-                    </a>
-                </li>
-                <li class="mb-4">
-                    <a href="#" class="flex items-center text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400">
-                        <i class="fas fa-users mr-3"></i> Kelola Pengguna
-                    </a>
-                </li>
-                <li class="mb-4">
-                    <a href="#" class="flex items-center text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400">
-                        <i class="fas fa-chart-line mr-3"></i> Statistik
-                    </a>
-                </li>
-                <li class="mb-4">
-                    <a href="#" class="flex items-center text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400">
-                        <i class="fas fa-cogs mr-3"></i> Pengaturan
-                    </a>
-                </li>
-            </ul>
+    <div class="w-64 bg-white shadow-md sidebar sidebar-closed fixed top-0 left-0 h-full" id="sidebar">
+        <div class="p-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <img src="src/img/reyon.png" alt="Logo" width="40" height="40" class="mr-2"/>
+                    <span class="text-lg font-semibold">Beauty Booquet</span>
+                </div>
+            </div>
+            <a href="postingan_baru.html" class="mt-4 block w-full bg-orange-500 text-white text-center py-2 rounded-md">+ POSTINGAN BARU</a>
         </div>
-        <div class="p-6">
-            <button id="logoutButton" class="bg-red-500 text-white px-4 py-2 rounded-lg w-full">
-                <i class="fas fa-sign-out-alt"></i> Logout
-            </button>
+        <div class="sidebar-content">
+            <nav class="mt-6">
+                <ul>
+                    <li id="postingan" class="flex items-center p-2 text-gray-700 hover:bg-gray-200">
+                        <i class="fas fa-file-alt mr-3"></i>
+                        <span>Postingan</span>
+                    </li>
+                    <li id="statistik" class="flex items-center p-2 text-gray-700 hover:bg-gray-200">
+                        <i class="fas fa-chart-bar mr-3"></i>
+                        <a href="statistik.html" class="flex items-center w-full text-gray-700 p-2">
+                            <span>Statistik</span>
+                        </a>
+                    </li>
+                    <li id="komentar" class="flex items-center p-2 text-gray-700 hover:bg-gray-200">
+                        <i class="fas fa-comments mr-3"></i>
+                        <a href="komentar.html" class="flex items-center w-full text-gray-700 p-2">
+                            <span>Komentar</span>
+                        </a>
+                    </li>
+                   
+                </ul>
+            </nav>
+            <div class="mt-auto p-4">
+                <a class="text-blue-500" href="#">Lihat blog</a>
+                <div class="text-gray-500 text-sm mt-2">
+                    <p>Persyaratan Layanan</p>
+                    <p>Privasi</p>
+                    <p>Kebijakan Konten</p>
+                </div>
+            </div>
         </div>
     </div>
+
     <!-- Main Content -->
-    <div class="flex-1 p-6">
-        <div class="flex justify-between items-center mb-6">
-            <h1 class="text-2xl font-bold">Admin Dashboard</h1>
-            <div>
-                <button id="toggleSidebarButton" class="bg-gray-500 text-white px-4 py-2 rounded-lg mr-2">
-                    <i class="fas fa-bars"></i>
+    <div class="flex flex-col ml-0 transition-all duration-300" id="main-content">
+        <div class="flex items-center justify-between bg-white p-4 shadow">
+            <div class="flex items-center">
+                <button class="p-2" id="menu-toggle">
+                    <i class="fas fa-bars text-gray-600"></i>
                 </button>
-                <button id="addPostButton" class="bg-blue-500 text-white px-4 py-2 rounded-lg">
-                    <i class="fas fa-plus"></i> Tambah Postingan
+                <img alt="Blogger logo" class="ml-2" height="40" src="src/img/reyon.png" width="40"/>
+            </div>
+            <div class="flex items-center w-full max-w-md mx-auto">
+                <input class="w-full p-2 border rounded-full" placeholder="Telusuri postingan" type="text"/>
+                <button class="ml-2 p-2">
+                    <i class="fas fa-search text-gray-600"></i>
                 </button>
-                <button onclick="toggleDarkMode()" class="bg-gray-500 text-white px-4 py-2 rounded-lg ml-2">
-                    <i class="fas fa-moon"></i> Dark Mode
+            </div>
+            <div class="flex items-center space-x-4">
+                <button class="p-2">
+                    <i class="fas fa-tag text-gray-600"></i>
+                </button>
+                <button class="p-2">
+                    <i class="fas fa-question-circle text-gray-600"></i>
+                </button>
+                <button class="p-2">
+                    <i class="fas fa-th text-gray-600"></i>
+                </button>
+                <button class="p-2">
+                    <i class="fas fa-user-circle text-blue-600"></i>
                 </button>
             </div>
         </div>
-        <div class="bg-[#EAC290] dark:bg-gray-800 p-6 rounded-lg shadow-lg">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-                <div class="bg-blue-100 dark:bg-blue-900 p-4 rounded-lg text-center">
-                    <h2 class="text-lg font-semibold">Jumlah Postingan</h2>
-                    <p class="text-2xl">2</p>
-                </div>
-                <div class="bg-green-100 dark:bg-green-900 p-4 rounded-lg text-center">
-                    <h2 class="text-lg font-semibold">Jumlah Komentar</h2>
-                    <p class="text-2xl">5</p>
-                </div>
-                <div class="bg-purple-100 dark:bg-purple-900 p-4 rounded-lg text-center">
-                    <h2 class="text-lg font-semibold">Kunjungan User</h2>
-                    <p class="text-2xl">89</p>
-                </div>
-                <div class="bg-yellow-100 dark:bg-yellow-900 p-4 rounded-lg text-center">
-                    <h2 class="text-lg font-semibold">Kunjungan User Bulan Lalu</h2>
-                    <p class="text-2xl">22</p>
-                </div>
-            </div>
-            <div class="mb-6">
-                <h2 class="text-xl font-semibold mb-4">Statistik Kunjungan User</h2>
-                <canvas id="userVisitsChart"></canvas>
-            </div>
-            <h2 class="text-xl font-semibold mb-4">Postingan Terbaru</h2>
-            <div class="bg-green-50 dark:bg-green-900 p-4 rounded-lg mb-4">
-                <div class="flex justify-between items-center mb-2">
-                    <h3 class="text-lg font-semibold">my daily activity</h3>
-                    <div>
-                        <i class="fas fa-edit text-blue-500 cursor-pointer edit-post"></i>
-                        <i class="fas fa-trash-alt text-red-500 cursor-pointer ml-2 delete-post"></i>
-                    </div>
-                </div>
-                <p class="mb-2">wow</p>
-                <p class="text-gray-500 dark:text-gray-400 text-sm mb-2">19 Oct 2024, 02:36</p>
-                <p class="font-semibold">Komentar:</p>
-                <button class="bg-gray-500 text-white px-4 py-2 rounded-lg mt-2">
-                    <i class="fas fa-comments"></i> 4 Komentar
+
+        <!-- Posts Section -->
+        <div class="p-4">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-lg font-semibold">Semua (2)</h2>
+                <button class="p-2">
+                    <i class="fas fa-cog text-gray-600"></i>
                 </button>
             </div>
-            <div class="bg-green-50 dark:bg-green-900 p-4 rounded-lg mb-4">
-                <div class="flex justify-between items-center mb-2">
-                    <h3 class="text-lg font-semibold">perkenalan</h3>
-                    <div>
-                        <i class="fas fa-edit text-blue-500 cursor-pointer edit-post"></i>
-                        <i class="fas fa-trash-alt text-red-500 cursor-pointer ml-2 delete-post"></i>
+            <div class="space-y-4">
+                <div class="post-item flex items-center justify-between bg-white p-4 shadow rounded relative">
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-gray-200 flex items-center justify-center rounded mr-4">
+                            <span class="text-2xl font-semibold text-gray-600">B</span>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold" id="post-title">Bouquet start 45k</h3>
+                            <p class="text-gray-500" id="post-content">Dipublikasikan 15 Okt</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4 relative">
+                        <span class="text-gray-600">Beauty Booqet</span>
+                        <div class="default-buttons flex items-center space-x-2">
+                            <button class="p-2">
+                                <i class="fas fa-share-alt text-gray-600"></i>
+                            </button>
+                            <span class="text-gray-600">5</span>
+                            <i class="fas fa-comment text-gray-600"></i>
+                            <span class="text-gray-600">10</span>
+                            <i class="fas fa-chart-bar text-gray-600"></i>
+                        </div>
+                        <div class="hover-buttons hidden space-x-2">
+                            <button class="p-2" id="edit-post-btn">
+                                <i class="fas fa-edit text-gray-600"></i>
+                            </button>
+                            <a href="view_post.html" class="p-2">
+                                <i class="fas fa-file-alt text-gray-600"></i>
+                            </a>
+                            <button class="p-2">
+                                <i class="fas fa-trash text-gray-600"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
-                <p class="mb-2">hai nama saya reyon</p>
-                <p class="text-gray-500 dark:text-gray-400 text-sm mb-2">19 Oct 2024, 02:09</p>
-                <p class="font-semibold">Komentar:</p>
-                <button class="bg-gray-500 text-white px-4 py-2 rounded-lg mt-2">
-                    <i class="fas fa-comments"></i> 1 Komentar
-                </button>
             </div>
         </div>
     </div>
+
+    <!-- Edit Modal -->
+    <div id="edit-modal" class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 hidden">
+        <div class="bg-white p-6 rounded-lg w-1/3">
+            <h2 class="text-lg font-semibold mb-4">Edit Postingan</h2>
+            <input type="text" id="edit-title" class="w-full p-2 border rounded mb-4" placeholder="Edit Judul Postingan" />
+            <textarea id="edit-content" class="w-full p-2 border rounded mb-4" placeholder="Edit Isi Postingan"></textarea>
+            <div class="flex justify-end space-x-2">
+                <button id="cancel-edit" class="px-4 py-2 bg-gray-300 rounded">Batal</button>
+                <button id="save-edit" class="px-4 py-2 bg-blue-500 text-white rounded">Simpan</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript to Toggle Sidebar and Edit Modal -->
     <script>
-        // Chart.js setup
-        const ctx = document.getElementById('userVisitsChart').getContext('2d');
-        const userVisitsChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: ['6 Bulan Lalu','5 Bulan Lalu','4 Bulan Lalu','3 Bulan Lalu','2 Bulan Lalu', 'Bulan Ini'],
-                datasets: [{
-                    label: 'Kunjungan User',
-                    data: [18,30,33,90, 22,89],
-                    backgroundColor: 'rgba(139, 92, 246, 0.2)',
-                    borderColor: '#8b5cf6',
-                    borderWidth: 2,
-                    fill: true,
-                    tension: 0.4
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
+        // Sidebar toggle functionality
+        const menuToggle = document.getElementById("menu-toggle");
+        const sidebar = document.getElementById("sidebar");
+        const mainContent = document.getElementById("main-content");
+
+        window.addEventListener('load', () => {
+            sidebar.classList.add("sidebar-closed");
+            mainContent.classList.add("ml-0");
+            mainContent.classList.remove("ml-64");
+        });
+
+        menuToggle.addEventListener("click", () => {
+            sidebar.classList.toggle("sidebar-closed");
+            if (sidebar.classList.contains("sidebar-closed")) {
+                mainContent.classList.add("ml-0");
+                mainContent.classList.remove("ml-64");
+            } else {
+                mainContent.classList.remove("ml-0");
+                mainContent.classList.add("ml-64");
             }
         });
 
-        // Event listeners for buttons
-        document.getElementById('addPostButton').addEventListener('click', function() {
-            alert('Tambah Postingan button clicked!');
+        // Edit modal functionality
+        document.getElementById("edit-post-btn").addEventListener("click", function(event) {
+            event.preventDefault();
+            document.getElementById("edit-modal").classList.remove("hidden");
+            document.getElementById("edit-title").value = document.getElementById("post-title").textContent;
+            document.getElementById("edit-content").value = document.getElementById("post-content").textContent;
         });
 
-        document.querySelectorAll('.edit-post').forEach(function(button) {
-            button.addEventListener('click', function() {
-                alert('Edit Post button clicked!');
-            });
+        document.getElementById("cancel-edit").addEventListener("click", function() {
+            document.getElementById("edit-modal").classList.add("hidden");
         });
 
-        document.querySelectorAll('.delete-post').forEach(function(button) {
-            button.addEventListener('click', function() {
-                alert('Delete Post button clicked!');
-            });
-        });
-
-        document.getElementById('logoutButton').addEventListener('click', function() {
-            alert('Logout button clicked!');
-        });
-
-        document.getElementById('toggleSidebarButton').addEventListener('click', function() {
-            const sidebar = document.getElementById('sidebar');
-            sidebar.classList.toggle('hidden');
+        document.getElementById("save-edit").addEventListener("click", function() {
+            const newTitle = document.getElementById("edit-title").value;
+            const newContent = document.getElementById("edit-content").value;
+            document.getElementById("post-title").textContent = newTitle;
+            document.getElementById("post-content").textContent = newContent;
+            document.getElementById("edit-modal").classList.add("hidden");
         });
     </script>
 </body>
