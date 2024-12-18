@@ -4,6 +4,7 @@
     font-style: normal;
   }
 body {
+    background-color: #307ebe;
     margin: 20px;
 }
 table {
@@ -12,14 +13,14 @@ table {
     margin-bottom: 30px;
 }
 table, th, td {
-    border: 1px solid #ddd;
+    border: 1px solid #040303;
     text-align: center;
 }
 th, td {
     padding: 20px;
 }
 th {
-    background-color: #f2f2f2;
+    background-color: #704444;
 }
 h2 {
     text-align: center;
@@ -29,4 +30,5 @@ canvas {
     margin: 0 auto;
     display: block;
     max-width: 90%;
+    background-color: black;
 }
