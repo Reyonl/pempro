@@ -1,5 +1,5 @@
 body {
-    background-color: #307ebe;
+    background-color: #66b9be;
     margin: 0;
 }
 
@@ -15,7 +15,7 @@ body {
 
 .highlight {
     font-family: 'Dancing Script', cursive;
-    color: #d4009b;
+    color: #0769a6;
     position: relative;
     animation: blink 3s ease-in-out infinite; 
 }
@@ -73,7 +73,7 @@ body {
   }
 
 .gallery-bg {
-    background-color: #859CB6;
+    background-color: #66b9be;
 }
 
 
