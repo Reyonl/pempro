@@ -7,12 +7,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
     <style>
-        .post-item:hover .default-buttons {
-            display: none;
-        }
-        .post-item:hover .hover-buttons {
-            display: flex;
-        }
         .sidebar {
             transition: transform 0.3s ease;
         }
@@ -29,7 +23,7 @@
 </head>
 <body class="bg-gray-100">
     <!-- Sidebar -->
-    <div class="w-64 bg-white shadow-md sidebar sidebar-closed fixed top-0 left-0 h-full" id="sidebar">
+    <div class="w-64 bg-white shadow-md sidebar fixed top-0 left-0 h-full" id="sidebar">
         <div class="p-4">
             <div class="flex items-center justify-between">
                 <div class="flex items-center">
@@ -42,17 +36,17 @@
         <div class="sidebar-content">
             <nav class="mt-6">
                 <ul>
-                    <li id="postingan" class="flex items-center p-2 text-gray-700 hover:bg-gray-200">
+                    <li class="flex items-center p-2 text-gray-700 hover:bg-gray-200">
                         <i class="fas fa-file-alt mr-3"></i>
                         <span>Postingan</span>
                     </li>
-                    <li id="statistik" class="flex items-center p-2 text-gray-700 hover:bg-gray-200">
+                    <li class="flex items-center p-2 text-gray-700 hover:bg-gray-200">
                         <i class="fas fa-chart-bar mr-3"></i>
                         <a href="statistik.html" class="flex items-center w-full text-gray-700 p-2">
                             <span>Statistik</span>
                         </a>
                     </li>
-                    <li id="komentar" class="flex items-center p-2 text-gray-700 hover:bg-gray-200">
+                    <li class="flex items-center p-2 text-gray-700 hover:bg-gray-200">
                         <i class="fas fa-comments mr-3"></i>
                         <a href="komentar.html" class="flex items-center w-full text-gray-700 p-2">
                             <span>Komentar</span>
@@ -72,7 +66,7 @@
     </div>
 
     <!-- Main Content -->
-    <div class="flex flex-col ml-0 transition-all duration-300" id="main-content">
+    <div class="flex flex-col ml-64 transition-all duration-300" id="main-content">
         <div class="flex items-center justify-between bg-white p-4 shadow">
             <div class="flex items-center">
                 <button class="p-2" id="menu-toggle">
@@ -267,31 +261,16 @@
         </div>
     </div>
 
-    <!-- JavaScript to Toggle Sidebar and Edit Modal -->
     <script>
-        // Sidebar toggle functionality
         const menuToggle = document.getElementById("menu-toggle");
         const sidebar = document.getElementById("sidebar");
         const mainContent = document.getElementById("main-content");
 
-        window.addEventListener('load', () => {
-            sidebar.classList.add("sidebar-closed");
-            mainContent.classList.add("ml-0");
-            mainContent.classList.remove("ml-64");
-        });
-
         menuToggle.addEventListener("click", () => {
             sidebar.classList.toggle("sidebar-closed");
-            if (sidebar.classList.contains("sidebar-closed")) {
-                mainContent.classList.add("ml-0");
-                mainContent.classList.remove("ml-64");
-            } else {
-                mainContent.classList.remove("ml-0");
-                mainContent.classList.add("ml-64");
-            }
+            mainContent.classList.toggle("ml-64");
+            mainContent.classList.toggle("ml-0");
         });
-
-        // Edit modal functionality
         function setupEditButton(btnId, titleId, contentId) {
             document.getElementById(btnId).addEventListener("click", function(event) {
                 event.preventDefault();
