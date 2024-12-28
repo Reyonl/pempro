@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Postingan Baru</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
     <style>
-        /* Custom toolbar icon styling */
         .toolbar-icon {
             cursor: pointer;
             padding: 8px;
@@ -19,69 +19,147 @@
     </style>
 </head>
 <body class="bg-gray-100">
-    <div class="flex flex-col md:flex-row p-4 md:p-8 space-y-6 md:space-y-0 md:space-x-6">
-        <!-- Main editor section -->
-        <div class="flex-grow bg-white p-4 shadow-md rounded-md">
-            <!-- Title input -->
-            <input type="text" placeholder="Judul" class="w-full text-2xl font-semibold border-b mb-4 focus:outline-none focus:border-orange-500 p-2" />
-
-            <!-- Toolbar section -->
-            <div class="flex flex-wrap items-center border-b mb-4 space-x-2 space-y-2">
-                <span class="toolbar-icon"><i class="fas fa-bold"></i></span>
-                <span class="toolbar-icon"><i class="fas fa-italic"></i></span>
-                <span class="toolbar-icon"><i class="fas fa-underline"></i></span>
-                <span class="toolbar-icon"><i class="fas fa-strikethrough"></i></span>
-                <span class="toolbar-icon"><i class="fas fa-align-left"></i></span>
-                <span class="toolbar-icon"><i class="fas fa-align-center"></i></span>
-                <span class="toolbar-icon"><i class="fas fa-align-right"></i></span>
-                <span class="toolbar-icon"><i class="fas fa-list-ul"></i></span>
-                <span class="toolbar-icon"><i class="fas fa-list-ol"></i></span>
-                <span class="toolbar-icon"><i class="fas fa-link"></i></span>
-                <span class="toolbar-icon"><i class="fas fa-image"></i></span>
+    <!-- Sidebar -->
+    <div class="w-64 bg-white shadow-md sidebar fixed top-0 left-0 h-full" id="sidebar">
+        <div class="p-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <img src="src/img/reyon.png" alt="Logo" width="40" height="40" class="mr-2"/>
+                    <span class="text-lg font-semibold">Reyon Lau</span>
+                </div>
             </div>
+            <a href="postingan_baru.html" class="mt-4 block w-full bg-orange-500 text-white text-center py-2 rounded-md">+ POSTINGAN BARU</a>
+        </div>
+        <div class="sidebar-content">
+            <nav class="mt-6">
+                <ul>
+                    <li class="flex items-center p-2 text-gray-700 hover:bg-gray-200">
+                        <i class="fas fa-file-alt mr-3"></i>
+                        <a href="dashboard.html">
+                        <span>Postingan</span>
+                    </a>
+                    </li>
+                    <li class="flex items-center p-2 text-gray-700 hover:bg-gray-200">
+                        <i class="fas fa-chart-bar mr-3"></i>
+                        <a href="statistik.html" class="flex items-center w-full text-gray-700 p-2">
+                            <span>Statistik</span>
+                        </a>
+                    </li>
+                    <li class="flex items-center p-2 text-gray-700 hover:bg-gray-200">
+                        <i class="fas fa-comments mr-3"></i>
+                        <a href="komentar.html" class="flex items-center w-full text-gray-700 p-2">
+                            <span>Komentar</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="mt-auto p-4">
+                <a class="text-blue-500" href="#">Lihat blog</a>
+                <div class="text-gray-500 text-sm mt-2">
+                    <p>Persyaratan Layanan</p>
+                    <p>Privasi</p>
+                    <p>Kebijakan Konten</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
-            <!-- Content input -->
-            <textarea placeholder="Mulai menulis..." class="w-full h-96 border focus:outline-none focus:border-orange-500 p-4 rounded-md resize-none"></textarea>
+    <!-- Main Content -->
+    <div class="flex flex-col ml-64 transition-all duration-300" id="main-content">
+        <div class="flex items-center justify-between bg-white p-4 shadow">
+            <div class="flex items-center">
+                <button class="p-2" id="menu-toggle">
+                    <i class="fas fa-bars text-gray-600"></i>
+                </button>
+                <img alt="Blogger logo" class="ml-2" height="40" src="src/img/reyon.png" width="40"/>
+            </div>
+            <div class="flex items-center w-full max-w-md mx-auto">
+                <input class="w-full p-2 border rounded-full" placeholder="Telusuri postingan" type="text"/>
+                <button class="ml-2 p-2">
+                    <i class="fas fa-search text-gray-600"></i>
+                </button>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button class="p-2">
+                    <i class="fas fa-tag text-gray-600"></i>
+                </button>
+                <button class="p-2">
+                    <i class="fas fa-question-circle text-gray-600"></i>
+                </button>
+                <button class="p-2">
+                    <i class="fas fa-th text-gray-600"></i>
+                </button>
+                <button class="p-2">
+                    <i class="fas fa-user-circle text-blue-600"></i>
+                </button>
+            </div>
         </div>
 
-        <!-- Sidebar for post settings -->
-        <div class="w-full md:w-1/4 bg-white p-4 shadow-md rounded-md">
-            <button class="w-full bg-orange-500 text-white py-2 mb-4 rounded-md">Publikasikan</button>
+        <!-- buat postingan area content -->
+        <div class="flex flex-col md:flex-row p-4 md:p-8 space-y-6 md:space-y-0 md:space-x-6">
+            <!-- Main editor section -->
+            <div class="flex-grow bg-white p-4 shadow-md rounded-md">
+                <!-- Title input -->
+                <input type="text" placeholder="Judul" class="w-full text-2xl font-semibold border-b mb-4 focus:outline-none focus:border-orange-500 p-2" />
 
-            <div class="border-t pt-4">
-                <h3 class="font-semibold mb-2">Setelan postingan</h3>
-                
-                <!-- Label setting -->
-                <div class="mb-4">
-                    <label class="block font-medium">Label</label>
-                    <input type="text" placeholder="Pisahkan label dengan koma" class="w-full border p-2 mt-1 rounded-md" />
+                <!-- Toolbar section -->
+                <div class="flex flex-wrap items-center border-b mb-4 space-x-2 space-y-2">
+                    <span class="toolbar-icon"><i class="fas fa-bold"></i></span>
+                    <span class="toolbar-icon"><i class="fas fa-italic"></i></span>
+                    <span class="toolbar-icon"><i class="fas fa-underline"></i></span>
+                    <span class="toolbar-icon"><i class="fas fa-strikethrough"></i></span>
+                    <span class="toolbar-icon"><i class="fas fa-align-left"></i></span>
+                    <span class="toolbar-icon"><i class="fas fa-align-center"></i></span>
+                    <span class="toolbar-icon"><i class="fas fa-align-right"></i></span>
+                    <span class="toolbar-icon"><i class="fas fa-list-ul"></i></span>
+                    <span class="toolbar-icon"><i class="fas fa-list-ol"></i></span>
+                    <span class="toolbar-icon"><i class="fas fa-link"></i></span>
+                    <span class="toolbar-icon"><i class="fas fa-image"></i></span>
                 </div>
 
-                <!-- Publish date setting -->
-                <div class="mb-4">
-                    <label class="block font-medium">Dipublikasikan pada</label>
-                    <input type="datetime-local" class="w-full border p-2 mt-1 rounded-md" />
-                </div>
+                <!-- Content input -->
+                <textarea placeholder="Mulai menulis..." class="w-full h-96 border focus:outline-none focus:border-orange-500 p-4 rounded-md resize-none"></textarea>
+            </div>
 
-                <!-- Permalink setting -->
-                <div class="mb-4">
-                    <label class="block font-medium">Permalink</label>
-                    <input type="text" placeholder="Masukkan permalink" class="w-full border p-2 mt-1 rounded-md" />
-                </div>
+            <!-- Sidebar for post settings -->
+            <div class="w-full md:w-1/4 bg-white p-4 shadow-md rounded-md">
+                <button class="w-full bg-orange-500 text-white py-2 mb-4 rounded-md">Publikasikan</button>
 
-                <!-- Location setting -->
-                <div class="mb-4">
-                    <label class="block font-medium">Lokasi</label>
-                    <input type="text" placeholder="Masukkan lokasi" class="w-full border p-2 mt-1 rounded-md" />
-                </div>
+                <div class="border-t pt-4">
+                    <h3 class="font-semibold mb-2">Setelan postingan</h3>
+                    
+                    <!-- Label setting -->
+                    <div class="mb-4">
+                        <label class="block font-medium">Label</label>
+                        <input type="text" placeholder="Pisahkan label dengan koma" class="w-full border p-2 mt-1 rounded-md" />
+                    </div>
 
-                <!-- Options -->
-                <div class="mb-4">
-                    <label class="block font-medium">Opsi</label>
-                    <select class="w-full border p-2 mt-1 rounded-md">
-                        <option value="">Opsi 1</option>
-                        <option value="">Opsi 2</option>
-                    </select>
+                    <!-- Publish date setting -->
+                    <div class="mb-4">
+                        <label class="block font-medium">Dipublikasikan pada</label>
+                        <input type="datetime-local" class="w-full border p-2 mt-1 rounded-md" />
+                    </div>
+
+                    <!-- Permalink setting -->
+                    <div class="mb-4">
+                        <label class="block font-medium">Permalink</label>
+                        <input type="text" placeholder="Masukkan permalink" class="w-full border p-2 mt-1 rounded-md" />
+                    </div>
+
+                    <!-- Location setting -->
+                    <div class="mb-4">
+                        <label class="block font-medium">Lokasi</label>
+                        <input type="text" placeholder="Masukkan lokasi" class="w-full border p-2 mt-1 rounded-md" />
+                    </div>
+
+                    <!-- Options -->
+                    <div class="mb-4">
+                        <label class="block font-medium">Opsi</label>
+                        <select class="w-full border p-2 mt-1 rounded-md">
+                            <option value="">Opsi 1</option>
+                            <option value="">Opsi 2</option>
+                        </select>
+                    </div>
                 </div>
             </div>
         </div>
