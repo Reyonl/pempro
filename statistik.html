@@ -3,102 +3,195 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Statistik</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
     <style>
-        /* Chart containers hidden by default */
-        .chart-container {
-            display: none;
-            height: 300px;
+          .chart-container {
+        position: relative;
+        height: auto;
+    }
+
+    .pie-chart {
+    display: block;
+    width: 100% !important;
+    height: auto !important;
+}
+        .sidebar {
+            transition: transform 0.3s ease;
         }
-        .chart-container.active {
-            display: block;
+        .sidebar-closed {
+            transform: translateX(-100%);
+        }
+        .ml-0 {
+            margin-left: 0 !important;
+        }
+        .ml-64 {
+            margin-left: 16rem;
+        }
+        .menu-item.active {
+            background-color: bisque; /* Warna background saat aktif */
+            color: black; /* Warna teks saat aktif */
+            font-weight: bold; /* Menebalkan teks */
         }
     </style>
 </head>
-<body class="bg-gray-100 min-h-screen flex flex-col">
-
-    <!-- Navbar -->
-    <nav class="bg-blue-600 text-white p-4 flex justify-between items-center">
-        <h1 class="text-lg font-semibold">Statistik</h1>
-        <a href="index.html" class="bg-white text-blue-600 py-2 px-4 rounded hover:bg-gray-200">Back to Home</a>
-    </nav>
-
-    <!-- Content Wrapper -->
-    <div class="flex flex-1 flex-col lg:flex-row">
-        
-        <!-- Sidebar -->
-        <aside class="w-full lg:w-1/4 bg-white shadow-md p-4">
-            <h2 class="text-lg font-semibold mb-4">Pilih Statistik</h2>
-            <button onclick="showChart('weeklyViewsChart')" class="w-full bg-blue-500 text-white py-2 mb-2 rounded">View Mingguan</button>
-            <button onclick="showChart('hourlyIntensityChart')" class="w-full bg-blue-500 text-white py-2 mb-2 rounded">Intensitas per Jam</button>
-            <button onclick="showChart('monthlyViewsChart')" class="w-full bg-blue-500 text-white py-2 mb-2 rounded">View Bulanan</button>
-            <button onclick="showChart('yearlyOverviewChart')" class="w-full bg-blue-500 text-white py-2 rounded">Overview Tahunan</button>
-        </aside>
-
-        <!-- Main Content Area -->
-        <main class="flex-1 p-4 lg:p-8 bg-gray-50">
-            <div id="weeklyViewsChart" class="chart-container active">
-                <h3 class="text-xl font-semibold mb-4 text-center">Jumlah View per Hari (Minggu Ini)</h3>
-                <canvas></canvas>
+<body class="bg-gray-100">
+    <!-- Sidebar -->
+    <div class="w-64 bg-white shadow-md sidebar fixed top-0 left-0 h-full" id="sidebar">
+        <div class="p-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <img src="src/img/reyon.png" alt="Logo" width="40" height="40" class="mr-2"/>
+                    <span class="text-lg font-semibold">Reyon Lau</span>
+                </div>
             </div>
-
-            <div id="hourlyIntensityChart" class="chart-container">
-                <h3 class="text-xl font-semibold mb-4 text-center">Intensitas Penglihat per Jam</h3>
-                <canvas></canvas>
+            <a href="postingan_baru.html" class="mt-4 block w-full bg-orange-500 text-white text-center py-2 rounded-md">+ POSTINGAN BARU</a>
+        </div>
+        <div class="sidebar-content">
+            <nav class="mt-6">
+                <ul>
+                    <li class="flex items-center p-2 text-gray-700 hover:bg-gray-200">
+                        <i class="fas fa-file-alt mr-3"></i>
+                        <span>Postingan</span>
+                    </li>
+                    <li class="menu-item flex items-center p-2 text-gray-700 hover:bg-gray-200 rounded active">
+                        <i class="fas fa-chart-bar mr-3"></i>
+                        <a href="statistik.html" class="flex items-center w-full text-gray-700 p-2">
+                            <span>Statistik</span>
+                        </a>
+                    </li>
+                    <li class="flex items-center p-2 text-gray-700 hover:bg-gray-200">
+                        <i class="fas fa-comments mr-3"></i>
+                        <a href="komentar.html" class="flex items-center w-full text-gray-700 p-2">
+                            <span>Komentar</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="mt-auto p-4">
+                <a class="text-blue-500" href="#">Lihat blog</a>
+                <div class="text-gray-500 text-sm mt-2">
+                    <p>Persyaratan Layanan</p>
+                    <p>Privasi</p>
+                    <p>Kebijakan Konten</p>
+                </div>
             </div>
-
-            <div id="monthlyViewsChart" class="chart-container">
-                <h3 class="text-xl font-semibold mb-4 text-center">Jumlah View per Bulan (Tahun Ini)</h3>
-                <canvas></canvas>
-            </div>
-
-            <div id="yearlyOverviewChart" class="chart-container">
-                <h3 class="text-xl font-semibold mb-4 text-center">Overview Tahunan</h3>
-                <canvas></canvas>
-            </div>
-        </main>
+        </div>
     </div>
 
+    <!-- Main Content -->
+    <div class="flex flex-col ml-64 transition-all duration-300" id="main-content">
+        <div class="flex items-center justify-between bg-white p-4 shadow">
+            <div class="flex items-center">
+                <button class="p-2" id="menu-toggle">
+                    <i class="fas fa-bars text-gray-600"></i>
+                </button>
+                <img alt="Blogger logo" class="ml-2" height="40" src="src/img/reyon.png" width="40"/>
+            </div>
+            <div class="flex items-center w-full max-w-md mx-auto">
+                <input class="w-full p-2 border rounded-full" placeholder="Telusuri postingan" type="text"/>
+                <button class="ml-2 p-2">
+                    <i class="fas fa-search text-gray-600"></i>
+                </button>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button class="p-2">
+                    <i class="fas fa-tag text-gray-600"></i>
+                </button>
+                <button class="p-2">
+                    <i class="fas fa-question-circle text-gray-600"></i>
+                </button>
+                <button class="p-2">
+                    <i class="fas fa-th text-gray-600"></i>
+                </button>
+                <button class="p-2">
+                    <i class="fas fa-user-circle text-blue-600"></i>
+                </button>
+            </div>
+        </div>
+
+         <!-- Chart Content -->
+         <div class="p-6 bg-white shadow mt-4">
+            <h2 class="text-xl font-bold mb-4">Dashboard Statistik</h2>
+            <canvas id="myChart" height="100"></canvas>
+        </div>
+
+        <!-- piechart content -->
+        <div class="p-6 bg-white shadow mt-4">
+            <h2 class="text-xl font-bold mb-4">Distribusi Kategori Postingan</h2>
+            <div class="chart-container mx-auto" style="width: 50%; max-width: 300px;">
+                <canvas id="pieChart" class="pie-chart"></canvas>
+            </div>
+        </div>
+        
+
     <script>
-        // Function to show the selected chart
-        function showChart(chartId) {
-            // Hide all chart containers
-            document.querySelectorAll('.chart-container').forEach(container => {
-                container.classList.remove('active');
-            });
+        // Sidebar toggle
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.getElementById('main-content');
 
-            // Show the selected chart container
-            document.getElementById(chartId).classList.add('active');
-        }
+            sidebar.classList.toggle('sidebar-closed');
+            mainContent.classList.toggle('ml-64');
+            mainContent.classList.toggle('ml-0');
+        });
 
-        // Chart.js configurations for each chart
-        const weeklyViewsData = {
-            labels: ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'],
-            datasets: [{ label: 'Jumlah View', data: [20, 35, 40, 50, 30, 45, 60], backgroundColor: 'rgba(255, 99, 132, 0.2)', borderColor: 'rgba(255, 99, 132, 1)', borderWidth: 1 }]
-        };
+        // Bar Chart Initialization
+        const ctx = document.getElementById('myChart').getContext('2d');
+        const myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'],
+                datasets: [{
+                    label: 'Jumlah Kunjungan',
+                    data: [12, 19, 3, 5, 2, 3, 7],
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
 
-        const hourlyIntensityData = {
-            labels: ['00:00', '02:00', '04:00', '06:00', '08:00', '10:00', '12:00', '14:00', '16:00', '18:00', '20:00', '22:00'],
-            datasets: [{ label: 'Intensitas Penglihat', data: [5, 3, 2, 7, 10, 15, 20, 25, 30, 28, 18, 10], fill: false, borderColor: 'rgba(54, 162, 235, 1)', tension: 0.1 }]
-        };
-
-        const monthlyViewsData = {
-            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'],
-            datasets: [{ label: 'Jumlah View', data: [300, 400, 350, 500, 700, 600, 800, 750, 850, 900, 950, 1000], backgroundColor: 'rgba(75, 192, 192, 0.2)', borderColor: 'rgba(75, 192, 192, 1)', borderWidth: 1 }]
-        };
-
-        const yearlyOverviewData = {
-            labels: ['2019', '2020', '2021', '2022', '2023'],
-            datasets: [{ label: 'Jumlah View per Tahun', data: [5000, 7000, 6000, 8000, 9500], backgroundColor: 'rgba(153, 102, 255, 0.2)', borderColor: 'rgba(153, 102, 255, 1)', borderWidth: 1 }]
-        };
-
-        // Render charts
-        new Chart(document.querySelector('#weeklyViewsChart canvas'), { type: 'bar', data: weeklyViewsData, options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true } } } });
-        new Chart(document.querySelector('#hourlyIntensityChart canvas'), { type: 'line', data: hourlyIntensityData, options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true } } } });
-        new Chart(document.querySelector('#monthlyViewsChart canvas'), { type: 'bar', data: monthlyViewsData, options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true } } } });
-        new Chart(document.querySelector('#yearlyOverviewChart canvas'), { type: 'bar', data: yearlyOverviewData, options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true } } } });
+        // Pie Chart Initialization
+        const pieCtx = document.getElementById('pieChart').getContext('2d');
+        const pieChart = new Chart(pieCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Teknologi', 'Lifestyle', 'Travel', 'Edukasi', 'Lainnya'],
+                datasets: [{
+                    label: 'Distribusi Kategori',
+                    data: [30, 20, 15, 25, 10],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)'
+                    ],
+                    borderWidth: 0.5
+                }]
+            },
+            options: {
+                responsive: true
+            }
+        });
     </script>
 </body>
 </html>
