@@ -24,6 +24,11 @@
             .ml-64 {
                 margin-left: 16rem;
             }
+            .menu-item.active {
+            background-color: bisque; /* Warna background saat aktif */
+            color: black; /* Warna teks saat aktif */
+            font-weight: bold; /* Menebalkan teks */
+        }
         </style>
     </head>
     <body class="bg-gray-100">
@@ -41,7 +46,7 @@
             <div class="sidebar-content">
                 <nav class="mt-6">
                     <ul>
-                        <li class="flex items-center p-2 text-gray-700 hover:bg-gray-200">
+                        <li class="menu-item flex items-center p-2 text-gray-700 hover:bg-gray-200 rounded active">
                             <i class="fas fa-file-alt mr-3"></i>
                             <a href="dashboard.html">
                             <span>Postingan</span>
