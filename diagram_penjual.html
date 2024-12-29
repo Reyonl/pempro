@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laporan Penjualan</title>
+    <!-- Include Chart.js Library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="icon" href="src/images/statistics.png" type="image/x-icon">
+    <link rel="stylesheet" href="src/diagram.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
+</head>
+<body class="itim-regular">
+    <h2>Laporan Penjualan</h2>
+    <!-- Tabel Data -->
+    <table>
+        <thead>
+            <tr>
+                <th>Tahun</th>
+                <th>Januari</th>
+                <th>Februari</th>
+                <th>Maret</th>
+                <th>April</th>
+                <th>Mei</th>
+                <th>Juni</th>
+                <th>Juli</th>
+                <th>Agustus</th>
+                <th>September</th>
+                <th>Oktober</th>
+                <th>November</th>
+                <th>Desember</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>2021</td><td>3105</td><td>4207</td><td>5001</td><td>3987</td><td>4503</td><td>3600</td><td>2987</td><td>3412</td><td>4900</td><td>3789</td><td>6201</td><td>4504</td>
+            </tr>
+            <tr>
+                <td>2022</td><td>4017</td><td>6135</td><td>7091</td><td>5841</td><td>5036</td><td>4547</td><td>3467</td><td>3970</td><td>6313</td><td>3595</td><td>9207</td><td>5945</td>
+            </tr>
+            <tr>
+                <td>2023</td><td>2416</td><td>4136</td><td>7935</td><td>8004</td><td>9505</td><td>5026</td><td>6108</td><td>6343</td><td>9404</td><td>9280</td><td>9287</td><td>8689</td>
+            </tr>
+            <tr>
+                <td>2024</td><td>5789</td><td>6987</td><td>8210</td><td>7654</td><td>6543</td><td>7123</td><td>8456</td><td>9101</td><td>8765</td><td>7654</td><td>6789</td><td>9987</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Diagram Batang -->
+    <canvas id="salesChart" width="800" height="400"></canvas>
+
+    <script>
+        // Data Penjualan
+        const data = {
+            labels: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'],
+            datasets: [
+                {
+                    label: '2021',
+                    backgroundColor: 'green',
+                    data: [3105, 4207, 5001, 3987, 4503, 3600, 2987, 3412, 4900, 3789, 6201, 4504]
+                },
+                {
+                    label: '2022',
+                    backgroundColor: 'blue',
+                    data: [4017, 6135, 7091, 5841, 5036, 4547, 3467, 3970, 6313, 3595, 9207, 5945]
+                },
+                {
+                    label: '2023',
+                    backgroundColor: 'red',
+                    data: [2416, 4136, 7935, 8004, 9505, 5026, 6108, 6343, 9404, 9280, 9287, 8689]
+                },
+                {
+                    label: '2024',
+                    backgroundColor: 'purple',
+                    data: [5789, 6987, 8210, 7654, 6543, 7123, 8456, 9101, 8765, 7654, 6789, 9987]
+                }
+            ]
+        };
+
+        // Konfigurasi Chart
+        const config = {
+            type: 'bar',
+            data: data,
+            options: {
+                responsive: true,
+                animation: {
+                    duration: 2000, // Animasi muncul selama 2 detik
+                    easing: 'easeOutBounce' // Efek animasi lembut
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top'
+                    },
+                    title: {
+                        display: true,
+                        text: 'Laporan Penjualan'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 1000
+                        }
+                    }
+                }
+            }
+        };
+
+        // Render Chart
+        const ctx = document.getElementById('salesChart').getContext('2d');
+        new Chart(ctx, config);
+    </script>
+</body>
+</html>
