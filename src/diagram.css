@@ -31,10 +31,13 @@ canvas {
     display: block;
     max-width: 90%;
     background-color: rgb(18, 17, 17);
+    border-radius: 40px;
+    overflow: hidden;
 }
 
-#salesChart {
+/* #salesChart {
     border: 1px solid #000000;
     border-radius: 20px; 
     overflow: hidden; 
-  }
+  } */
+
