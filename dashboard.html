@@ -1,322 +1,313 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
-    <style>
-        .post-item:hover .default-buttons {
-            display: none;
-        }
-        .post-item:hover .hover-buttons {
-            display: flex;
-        }
-        .sidebar {
-            transition: transform 0.3s ease;
-        }
-        .sidebar-closed {
-            transform: translateX(-100%);
-        }
-        .ml-0 {
-            margin-left: 0 !important;
-        }
-        .ml-64 {
-            margin-left: 16rem;
-        }
-    </style>
-</head>
-<body class="bg-gray-100">
-    <!-- Sidebar -->
-    <div class="w-64 bg-white shadow-md sidebar sidebar-closed fixed top-0 left-0 h-full" id="sidebar">
-        <div class="p-4">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center">
-                    <img src="src/img/reyon.png" alt="Logo" width="40" height="40" class="mr-2"/>
-                    <span class="text-lg font-semibold">Reyon Lau</span>
-                </div>
-            </div>
-            <a href="postingan_baru.html" class="mt-4 block w-full bg-orange-500 text-white text-center py-2 rounded-md">+ POSTINGAN BARU</a>
-        </div>
-        <div class="sidebar-content">
-            <nav class="mt-6">
-                <ul>
-                    <li id="postingan" class="flex items-center p-2 text-gray-700 hover:bg-gray-200">
-                        <i class="fas fa-file-alt mr-3"></i>
-                        <span>Postingan</span>
-                    </li>
-                    <li id="statistik" class="flex items-center p-2 text-gray-700 hover:bg-gray-200">
-                        <i class="fas fa-chart-bar mr-3"></i>
-                        <a href="statistik.html" class="flex items-center w-full text-gray-700 p-2">
-                            <span>Statistik</span>
-                        </a>
-                    </li>
-                    <li id="komentar" class="flex items-center p-2 text-gray-700 hover:bg-gray-200">
-                        <i class="fas fa-comments mr-3"></i>
-                        <a href="komentar.html" class="flex items-center w-full text-gray-700 p-2">
-                            <span>Komentar</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-            <div class="mt-auto p-4">
-                <a class="text-blue-500" href="#">Lihat blog</a>
-                <div class="text-gray-500 text-sm mt-2">
-                    <p>Persyaratan Layanan</p>
-                    <p>Privasi</p>
-                    <p>Kebijakan Konten</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Main Content -->
-    <div class="flex flex-col ml-0 transition-all duration-300" id="main-content">
-        <div class="flex items-center justify-between bg-white p-4 shadow">
-            <div class="flex items-center">
-                <button class="p-2" id="menu-toggle">
-                    <i class="fas fa-bars text-gray-600"></i>
-                </button>
-                <img alt="Blogger logo" class="ml-2" height="40" src="src/img/reyon.png" width="40"/>
-            </div>
-            <div class="flex items-center w-full max-w-md mx-auto">
-                <input class="w-full p-2 border rounded-full" placeholder="Telusuri postingan" type="text"/>
-                <button class="ml-2 p-2">
-                    <i class="fas fa-search text-gray-600"></i>
-                </button>
-            </div>
-            <div class="flex items-center space-x-4">
-                <button class="p-2">
-                    <i class="fas fa-tag text-gray-600"></i>
-                </button>
-                <button class="p-2">
-                    <i class="fas fa-question-circle text-gray-600"></i>
-                </button>
-                <button class="p-2">
-                    <i class="fas fa-th text-gray-600"></i>
-                </button>
-                <button class="p-2">
-                    <i class="fas fa-user-circle text-blue-600"></i>
-                </button>
-            </div>
-        </div>
-
-        <!-- Posts Section -->
-        <div class="p-4">
-            <div class="flex items-center justify-between mb-4">
-                <h2 class="text-lg font-semibold">Semua (4)</h2>
-                <button class="p-2">
-                    <i class="fas fa-cog text-gray-600"></i>
-                </button>
-            </div>
-            <div class="space-y-4">
-                <div class="post-item flex items-center justify-between bg-white p-4 shadow rounded relative">
-                    <div class="flex items-center">
-                        <div class="w-12 h-12 bg-gray-200 flex items-center justify-center rounded mr-4">
-                            <span class="text-2xl font-semibold text-gray-600">B</span>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-semibold" id="post-title-1">Bouquet start 45k</h3>
-                            <p class="text-gray-500" id="post-content-1">Dipublikasikan 15 Okt</p>
-                        </div>
-                    </div>
-                    <div class="flex items-center space-x-4 relative">
-                        <span class="text-gray-600">Reyon Lau</span>
-                        <div class="default-buttons flex items-center space-x-2">
-                            <button class="p-2">
-                                <i class="fas fa-share-alt text-gray-600"></i>
-                            </button>
-                            <span class="text-gray-600">5</span>
-                            <i class="fas fa-comment text-gray-600"></i>
-                            <span class="text-gray-600">10</span>
-                            <i class="fas fa-chart-bar text-gray-600"></i>
-                        </div>
-                        <div class="hover-buttons hidden space-x-2">
-                            <button class="p-2" id="edit-post-btn-1">
-                                <i class="fas fa-edit text-gray-600"></i>
-                            </button>
-                            <a href="view_post.html" class="p-2">
-                                <i class="fas fa-file-alt text-gray-600"></i>
-                            </a>
-                            <button class="p-2">
-                                <i class="fas fa-trash text-gray-600"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="post-item flex items-center justify-between bg-white p-4 shadow rounded relative">
-                    <div class="flex items-center">
-                        <div class="w-12 h-12 bg-gray-200 flex items-center justify-center rounded mr-4">
-                            <span class="text-2xl font-semibold text-gray-600">G</span>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-semibold" id="post-title-2">Gardening Tips</h3>
-                            <p class="text-gray-500" id="post-content-2">Dipublikasikan 10 Okt</p>
-                        </div>
-                    </div>
-                    <div class="flex items-center space-x-4 relative">
-                        <span class="text-gray-600">Reyon Lau</span>
-                        <div class="default-buttons flex items-center space-x-2">
-                            <button class="p-2">
-                                <i class="fas fa-share-alt text-gray-600"></i>
-                            </button>
-                            <span class="text-gray-600">3</span>
-                            <i class="fas fa-comment text-gray-600"></i>
-                            <span class="text-gray-600">4</span>
-                            <i class="fas fa-chart-bar text-gray-600"></i>
-                        </div>
-                        <div class="hover-buttons hidden space-x-2">
-                            <button class="p-2" id="edit-post-btn-2">
-                                <i class="fas fa-edit text-gray-600"></i>
-                            </button>
-                            <a href="view_post.html" class="p-2">
-                                <i class="fas fa-file-alt text-gray-600"></i>
-                            </a>
-                            <button class="p-2">
-                                <i class="fas fa-trash text-gray-600"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="post-item flex items-center justify-between bg-white p-4 shadow rounded relative">
-                    <div class="flex items-center">
-                        <div class="w-12 h-12 bg-gray-200 flex items-center justify-center rounded mr-4">
-                            <span class="text-2xl font-semibold text-gray-600">T</span>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-semibold" id="post-title-3">Travel Diaries</h3>
-                            <p class="text-gray-500" id="post-content-3">Dipublikasikan 5 Okt</p>
-                        </div>
-                    </div>
-                    <div class="flex items-center space-x-4 relative">
-                        <span class="text-gray-600">Reyon Lau</span>
-                        <div class="default-buttons flex items-center space-x-2">
-                            <button class="p-2">
-                                <i class="fas fa-share-alt text-gray-600"></i>
-                            </button>
-                            <span class="text-gray-600">8</span>
-                            <i class="fas fa-comment text-gray-600"></i>
-                            <span class="text-gray-600">12</span>
-                            <i class="fas fa-chart-bar text-gray-600"></i>
-                        </div>
-                        <div class="hover-buttons hidden space-x-2">
-                            <button class="p-2" id="edit-post-btn-3">
-                                <i class="fas fa-edit text-gray-600"></i>
-                            </button>
-                            <a href="view_post.html" class="p-2">
-                                <i class="fas fa-file-alt text-gray-600"></i>
-                            </a>
-                            <button class="p-2">
-                                <i class="fas fa-trash text-gray-600"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="post-item flex items-center justify-between bg-white p-4 shadow rounded relative">
-                    <div class="flex items-center">
-                        <div class="w-12 h-12 bg-gray-200 flex items-center justify-center rounded mr-4">
-                            <span class="text-2xl font-semibold text-gray-600">R</span>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-semibold" id="post-title-4">Recipe Ideas</h3>
-                            <p class="text-gray-500" id="post-content-4">Dipublikasikan 1 Okt</p>
-                        </div>
-                    </div>
-                    <div class="flex items-center space-x-4 relative">
-                        <span class="text-gray-600">Reyon Lau</span>
-                        <div class="default-buttons flex items-center space-x-2">
-                            <button class="p-2">
-                                <i class="fas fa-share-alt text-gray-600"></i>
-                            </button>
-                            <span class="text-gray-600">10</span>
-                            <i class="fas fa-comment text-gray-600"></i>
-                            <span class="text-gray-600">15</span>
-                            <i class="fas fa-chart-bar text-gray-600"></i>
-                        </div>
-                        <div class="hover-buttons hidden space-x-2">
-                            <button class="p-2" id="edit-post-btn-4">
-                                <i class="fas fa-edit text-gray-600"></i>
-                            </button>
-                            <a href="view_post.html" class="p-2">
-                                <i class="fas fa-file-alt text-gray-600"></i>
-                            </a>
-                            <button class="p-2">
-                                <i class="fas fa-trash text-gray-600"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Edit Modal -->
-    <div id="edit-modal" class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 hidden">
-        <div class="bg-white p-6 rounded-lg w-1/3">
-            <h2 class="text-lg font-semibold mb-4">Edit Postingan</h2>
-            <input type="text" id="edit-title" class="w-full p-2 border rounded mb-4" placeholder="Edit Judul Postingan" />
-            <textarea id="edit-content" class="w-full p-2 border rounded mb-4" placeholder="Edit Isi Postingan"></textarea>
-            <div class="flex justify-end space-x-2">
-                <button id="cancel-edit" class="px-4 py-2 bg-gray-300 rounded">Batal</button>
-                <button id="save-edit" class="px-4 py-2 bg-blue-500 text-white rounded">Simpan</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- JavaScript to Toggle Sidebar and Edit Modal -->
-    <script>
-        // Sidebar toggle functionality
-        const menuToggle = document.getElementById("menu-toggle");
-        const sidebar = document.getElementById("sidebar");
-        const mainContent = document.getElementById("main-content");
-
-        window.addEventListener('load', () => {
-            sidebar.classList.add("sidebar-closed");
-            mainContent.classList.add("ml-0");
-            mainContent.classList.remove("ml-64");
-        });
-
-        menuToggle.addEventListener("click", () => {
-            sidebar.classList.toggle("sidebar-closed");
-            if (sidebar.classList.contains("sidebar-closed")) {
-                mainContent.classList.add("ml-0");
-                mainContent.classList.remove("ml-64");
-            } else {
-                mainContent.classList.remove("ml-0");
-                mainContent.classList.add("ml-64");
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Dashboard</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+        <style>
+            .menu-item.active {
+                background-color: bisque; /* Warna background saat aktif */
+                color: black; /* Warna teks saat aktif */
+                font-weight: bold; /* Menebalkan teks */
             }
-        });
-
-        // Edit modal functionality
-        function setupEditButton(btnId, titleId, contentId) {
-            document.getElementById(btnId).addEventListener("click", function(event) {
-                event.preventDefault();
-                document.getElementById("edit-modal").classList.remove("hidden");
-                document.getElementById("edit-title").value = document.getElementById(titleId).textContent;
-                document.getElementById("edit-content").value = document.getElementById(contentId).textContent;
-            });
+            .sidebar {
+                transition: transform 0.3s ease;
+            }
+            .sidebar-closed {
+                transform: translateX(-100%);
+            }
+            .ml-0 {
+                margin-left: 0 !important;
+            }
+            .ml-64 {
+                margin-left: 16rem;
+            }
+            .menu-item.active {
+            background-color: bisque; /* Warna background saat aktif */
+            color: black; /* Warna teks saat aktif */
+            font-weight: bold; /* Menebalkan teks */
         }
+        </style>
+    </head>
+    <body class="bg-gray-100">
+        <!-- Sidebar -->
+        <div class="w-64 bg-white shadow-md sidebar fixed top-0 left-0 h-full" id="sidebar">
+            <div class="p-4">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <img src="src/img/reyon.png" alt="Logo" width="40" height="40" class="mr-2"/>
+                        <span class="text-lg font-semibold">Reyon Lau</span>
+                    </div>
+                </div>
+                <a href="postingan_baru.html" class="mt-4 block w-full bg-orange-500 text-white text-center py-2 rounded-md">+ POSTINGAN BARU</a>
+            </div>
+            <div class="sidebar-content">
+                <nav class="mt-6">
+                    <ul>
+                        <li class="menu-item flex items-center p-2 text-gray-700 hover:bg-gray-200 rounded active">
+                            <i class="fas fa-file-alt mr-3"></i>
+                            <a href="dashboard.html">
+                            <span>Postingan</span>
+                        </a>
+                        </li>
+                        <li class="flex items-center p-2 text-gray-700 hover:bg-gray-200">
+                            <i class="fas fa-chart-bar mr-3"></i>
+                            <a href="statistik.html" class="flex items-center w-full text-gray-700 p-2">
+                                <span>Statistik</span>
+                            </a>
+                        </li>
+                        <li class="flex items-center p-2 text-gray-700 hover:bg-gray-200">
+                            <i class="fas fa-comments mr-3"></i>
+                            <a href="komentar.html" class="flex items-center w-full text-gray-700 p-2">
+                                <span>Komentar</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="mt-auto p-4">
+                    <a class="text-blue-500" href="#">Lihat blog</a>
+                    <div class="text-gray-500 text-sm mt-2">
+                        <p>Persyaratan Layanan</p>
+                        <p>Privasi</p>
+                        <p>Kebijakan Konten</p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        setupEditButton("edit-post-btn-1", "post-title-1", "post-content-1");
-        setupEditButton("edit-post-btn-2", "post-title-2", "post-content-2");
-        setupEditButton("edit-post-btn-3", "post-title-3", "post-content-3");
-        setupEditButton("edit-post-btn-4", "post-title-4", "post-content-4");
+        <!-- Main Content -->
+        <div class="flex flex-col ml-64 transition-all duration-300" id="main-content">
+            <div class="flex items-center justify-between bg-white p-4 shadow">
+                <div class="flex items-center">
+                    <button class="p-2" id="menu-toggle">
+                        <i class="fas fa-bars text-gray-600"></i>
+                    </button>
+                    <img alt="Blogger logo" class="ml-2" height="40" src="src/img/reyon.png" width="40"/>
+                </div>
+                <div class="flex items-center w-full max-w-md mx-auto">
+                    <input class="w-full p-2 border rounded-full" placeholder="Telusuri postingan" type="text"/>
+                    <button class="ml-2 p-2">
+                        <i class="fas fa-search text-gray-600"></i>
+                    </button>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="p-2">
+                        <i class="fas fa-tag text-gray-600"></i>
+                    </button>
+                    <button class="p-2">
+                        <i class="fas fa-question-circle text-gray-600"></i>
+                    </button>
+                    <button class="p-2">
+                        <i class="fas fa-th text-gray-600"></i>
+                    </button>
+                    <button class="p-2">
+                        <i class="fas fa-user-circle text-blue-600"></i>
+                    </button>
+                </div>
+            </div>
 
-        document.getElementById("cancel-edit").addEventListener("click", function() {
-            document.getElementById("edit-modal").classList.add("hidden");
-        });
+            <!-- Posts Section -->
+            <div class="p-4">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-lg font-semibold">Semua (4)</h2>
+                    <button class="p-2">
+                        <i class="fas fa-cog text-gray-600"></i>
+                    </button>
+                </div>
+                <div class="space-y-4">
+                    <div class="post-item flex items-center justify-between bg-white p-4 shadow rounded relative">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-gray-200 flex items-center justify-center rounded mr-4">
+                                <span class="text-2xl font-semibold text-gray-600">B</span>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-semibold" id="post-title-1">Bouquet start 45k</h3>
+                                <p class="text-gray-500" id="post-content-1">Dipublikasikan 15 Okt</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4 relative">
+                            <span class="text-gray-600">Reyon Lau</span>
+                            <div class="default-buttons flex items-center space-x-2">
+                                <button class="p-2">
+                                    <i class="fas fa-share-alt text-gray-600"></i>
+                                </button>
+                                <span class="text-gray-600">5</span>
+                                <i class="fas fa-comment text-gray-600"></i>
+                                <span class="text-gray-600">10</span>
+                                <i class="fas fa-chart-bar text-gray-600"></i>
+                            </div>
+                            <div class="hover-buttons hidden space-x-2">
+                                <button class="p-2" id="edit-post-btn-1">
+                                    <i class="fas fa-edit text-gray-600"></i>
+                                </button>
+                                <a href="view_post.html" class="p-2">
+                                    <i class="fas fa-file-alt text-gray-600"></i>
+                                </a>
+                                <button class="p-2">
+                                    <i class="fas fa-trash text-gray-600"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
 
-        document.getElementById("save-edit").addEventListener("click", function() {
-            const newTitle = document.getElementById("edit-title").value;
-            const newContent = document.getElementById("edit-content").value;
-            document.querySelector(".post-item:not(.hidden) .text-lg").textContent = newTitle;
-            document.querySelector(".post-item:not(.hidden) .text-gray-500").textContent = newContent;
-            document.getElementById("edit-modal").classList.add("hidden");
-        });
-    </script>
-</body>
-</html>
+                    <div class="post-item flex items-center justify-between bg-white p-4 shadow rounded relative">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-gray-200 flex items-center justify-center rounded mr-4">
+                                <span class="text-2xl font-semibold text-gray-600">G</span>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-semibold" id="post-title-2">Gardening Tips</h3>
+                                <p class="text-gray-500" id="post-content-2">Dipublikasikan 10 Okt</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4 relative">
+                            <span class="text-gray-600">Reyon Lau</span>
+                            <div class="default-buttons flex items-center space-x-2">
+                                <button class="p-2">
+                                    <i class="fas fa-share-alt text-gray-600"></i>
+                                </button>
+                                <span class="text-gray-600">3</span>
+                                <i class="fas fa-comment text-gray-600"></i>
+                                <span class="text-gray-600">4</span>
+                                <i class="fas fa-chart-bar text-gray-600"></i>
+                            </div>
+                            <div class="hover-buttons hidden space-x-2">
+                                <button class="p-2" id="edit-post-btn-2">
+                                    <i class="fas fa-edit text-gray-600"></i>
+                                </button>
+                                <a href="view_post.html" class="p-2">
+                                    <i class="fas fa-file-alt text-gray-600"></i>
+                                </a>
+                                <button class="p-2">
+                                    <i class="fas fa-trash text-gray-600"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="post-item flex items-center justify-between bg-white p-4 shadow rounded relative">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-gray-200 flex items-center justify-center rounded mr-4">
+                                <span class="text-2xl font-semibold text-gray-600">T</span>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-semibold" id="post-title-3">Travel Diaries</h3>
+                                <p class="text-gray-500" id="post-content-3">Dipublikasikan 5 Okt</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4 relative">
+                            <span class="text-gray-600">Reyon Lau</span>
+                            <div class="default-buttons flex items-center space-x-2">
+                                <button class="p-2">
+                                    <i class="fas fa-share-alt text-gray-600"></i>
+                                </button>
+                                <span class="text-gray-600">8</span>
+                                <i class="fas fa-comment text-gray-600"></i>
+                                <span class="text-gray-600">12</span>
+                                <i class="fas fa-chart-bar text-gray-600"></i>
+                            </div>
+                            <div class="hover-buttons hidden space-x-2">
+                                <button class="p-2" id="edit-post-btn-3">
+                                    <i class="fas fa-edit text-gray-600"></i>
+                                </button>
+                                <a href="view_post.html" class="p-2">
+                                    <i class="fas fa-file-alt text-gray-600"></i>
+                                </a>
+                                <button class="p-2">
+                                    <i class="fas fa-trash text-gray-600"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="post-item flex items-center justify-between bg-white p-4 shadow rounded relative">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-gray-200 flex items-center justify-center rounded mr-4">
+                                <span class="text-2xl font-semibold text-gray-600">R</span>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-semibold" id="post-title-4">Recipe Ideas</h3>
+                                <p class="text-gray-500" id="post-content-4">Dipublikasikan 1 Okt</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4 relative">
+                            <span class="text-gray-600">Reyon Lau</span>
+                            <div class="default-buttons flex items-center space-x-2">
+                                <button class="p-2">
+                                    <i class="fas fa-share-alt text-gray-600"></i>
+                                </button>
+                                <span class="text-gray-600">10</span>
+                                <i class="fas fa-comment text-gray-600"></i>
+                                <span class="text-gray-600">15</span>
+                                <i class="fas fa-chart-bar text-gray-600"></i>
+                            </div>
+                            <div class="hover-buttons hidden space-x-2">
+                                <button class="p-2" id="edit-post-btn-4">
+                                    <i class="fas fa-edit text-gray-600"></i>
+                                </button>
+                                <a href="view_post.html" class="p-2">
+                                    <i class="fas fa-file-alt text-gray-600"></i>
+                                </a>
+                                <button class="p-2">
+                                    <i class="fas fa-trash text-gray-600"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Edit Modal -->
+        <div id="edit-modal" class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 hidden">
+            <div class="bg-white p-6 rounded-lg w-1/3">
+                <h2 class="text-lg font-semibold mb-4">Edit Postingan</h2>
+                <input type="text" id="edit-title" class="w-full p-2 border rounded mb-4" placeholder="Edit Judul Postingan" />
+                <textarea id="edit-content" class="w-full p-2 border rounded mb-4" placeholder="Edit Isi Postingan"></textarea>
+                <div class="flex justify-end space-x-2">
+                    <button id="cancel-edit" class="px-4 py-2 bg-gray-300 rounded">Batal</button>
+                    <button id="save-edit" class="px-4 py-2 bg-blue-500 text-white rounded">Simpan</button>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            const menuToggle = document.getElementById("menu-toggle");
+            const sidebar = document.getElementById("sidebar");
+            const mainContent = document.getElementById("main-content");
+
+            menuToggle.addEventListener("click", () => {
+                sidebar.classList.toggle("sidebar-closed");
+                mainContent.classList.toggle("ml-64");
+                mainContent.classList.toggle("ml-0");
+            });
+            function setupEditButton(btnId, titleId, contentId) {
+                document.getElementById(btnId).addEventListener("click", function(event) {
+                    event.preventDefault();
+                    document.getElementById("edit-modal").classList.remove("hidden");
+                    document.getElementById("edit-title").value = document.getElementById(titleId).textContent;
+                    document.getElementById("edit-content").value = document.getElementById(contentId).textContent;
+                });
+            }
+
+            setupEditButton("edit-post-btn-1", "post-title-1", "post-content-1");
+            setupEditButton("edit-post-btn-2", "post-title-2", "post-content-2");
+            setupEditButton("edit-post-btn-3", "post-title-3", "post-content-3");
+            setupEditButton("edit-post-btn-4", "post-title-4", "post-content-4");
+
+            document.getElementById("cancel-edit").addEventListener("click", function() {
+                document.getElementById("edit-modal").classList.add("hidden");
+            });
+
+            document.getElementById("save-edit").addEventListener("click", function() {
+                const newTitle = document.getElementById("edit-title").value;
+                const newContent = document.getElementById("edit-content").value;
+                document.querySelector(".post-item:not(.hidden) .text-lg").textContent = newTitle;
+                document.querySelector(".post-item:not(.hidden) .text-gray-500").textContent = newContent;
+                document.getElementById("edit-modal").classList.add("hidden");
+            });
+        </script>
+    </body>
+    </html>

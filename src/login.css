@@ -1,57 +1,148 @@
-    body {
-        height: 100%;
-        margin: 0;
-        background: rgb(2,0,36);
-        background: linear-gradient(90deg, rgba(111,111,201,1) 23%, rgba(0,212,255,1) 92%);
-        background-size: cover; 
-        background-position: flex;
-    }
-    
-    .form-container {
-        width: 350px;
-        padding: 40px;
-        margin: 125px auto;
-        background-color: #fff;
-        border-radius: 15px;
-        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    }
+body {
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    box-sizing: border-box;
+}
 
-   
-    .signin-label {
-        text-align: center;
-        font-size: 24px;
-        font-weight: bold;
-        margin-bottom: 20px;
-    }
+.form-container {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 30px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
 
-    .Option-label{
+.signin-label {
+    font-size: 1.5rem;
     text-align: center;
-    font-size: 16px;
-    font-weight: lighter;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+}
 
+.social-buttons button {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5px;
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+}
+
+.social-buttons button:hover {
+    transform: scale(1.1);
+    background-color: #fff;
+}
+
+.Option-label {
+    text-align: center;
+    margin: 20px 0;
+    font-size: 1rem;
+}
+
+.form-control {
+    border-radius: 30px;
+}
+
+.btn-primary {
+    background-color: #2575fc;
+    border: none;
+    border-radius: 30px;
+    padding: 10px 20px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #6a11cb;
+}
+
+.btn-secondary {
+    border-radius: 30px;
+    padding: 10px 20px;
+}
+
+.register-link {
+    color: #ffcc00;
+    text-decoration: none;
+}
+
+.register-link:hover {
+    text-decoration: underline;
+}
+
+.input-group .btn-outline-secondary {
+    border-radius: 0 30px 30px 0;
+}
+
+.input-group input {
+    border-radius: 30px 0 0 30px;
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
     }
 
-    /* Styling for the social buttons */
-    .social-buttons {
-        display: flex;
-        justify-content: center;
-        gap: 10px;
-        margin-bottom: 20px;
+    .form-container {
+        padding: 20px;
+        max-width: 100%;
+    }
+
+    .signin-label {
+        font-size: 1.3rem;
     }
 
     .social-buttons button {
-        background-color: #f1f1f1;
-        border: none;
-        padding: 10px 15px;
-        border-radius: 5px;
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
     }
 
-    .social-buttons button i {
-        font-size: 18px;
+    .btn-primary, .btn-secondary {
+        padding: 8px 15px;
+        font-size: 0.9rem;
     }
 
-    /* Styling for input fields */
-    .form-group {
-        margin-bottom: 15px;
+    .form-control {
+        font-size: 0.9rem;
     }
+
+    .Option-label {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .signin-label {
+        font-size: 1.1rem;
+    }
+
+    .social-buttons button {
+        width: 35px;
+        height: 35px;
+        font-size: 0.9rem;
+    }
+
+    .btn-primary, .btn-secondary {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+
+    .form-control {
+        font-size: 0.8rem;
+    }
+
+    .Option-label {
+        font-size: 0.8rem;
+    }
+}
